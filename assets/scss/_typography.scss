@@ -2687,6 +2687,25 @@ $pc-bilan       : #3f5d8c;                 // bleu ardoise — bilan d’année
   }
 }
 
+/* ── Menu desktop sur deux lignes tant qu'il ne tient pas sur une ──
+   Logo (372 px) + 8 entrées (~910 px) dépassent les 1110 px utiles du
+   .container : sans ce bloc, les dernières entrées sortaient de l'écran
+   en dessous de ~1500 px. Les entrées passent sur deux lignes dans le
+   bandeau rouge, sans changer la hauteur du header. */
+@media (min-width: 992px) and (max-width: 1499.98px) {
+  .navbar-nav {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding-left: 20px;
+  }
+  // Préfixe .navigation : le `padding: 40px 0` du thème est importé après ce fichier.
+  // 2 × (18 px de texte + 31 px) = 98 px, la hauteur du header sur une ligne.
+  .navigation .navbar-expand-lg .navbar-nav .nav-link {
+    padding-top: 16px;
+    padding-bottom: 15px;
+  }
+}
+
 /* ── Participation card (actualités) ───────────────────────── */
 .participation-card {
   border-radius: 8px;
