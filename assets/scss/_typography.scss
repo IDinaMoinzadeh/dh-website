@@ -3666,70 +3666,61 @@ $pc-bilan       : #3f5d8c;                 // bleu ardoise — bilan d’année
   }
 }
 
-/* — Page Alumni (layouts/alumni/list.html) — */
-.alumni-intro {
-  &__lead {
-    font-size: 1.05rem;
-    line-height: 1.65;
-    color: $text-color;
-    margin-bottom: 1.25rem;
-  }
-
-  &__promos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-}
-
-.alumni-promo {
-  &__title {
-    font-family: $secondary-font;
-    font-size: 1.75rem;
-    color: $secondary-color;
-    border-left: 4px solid $primary-color;
-    padding-left: 0.75rem;
-    margin-bottom: 2rem;
-  }
-}
-
+/* — Page Alumni (layouts/alumni/list.html) —
+   Titres d'année et intro empruntés à la page Actualités (.actus-year…).
+   Fiches carrées ; seul le contenu très long (titres de mémoire) les allonge. */
 .alumni-card {
   display: flex;
   flex-direction: column;
   width: 100%;
+  aspect-ratio: 1 / 1;
   background: #fff;
-  border-left: 3px solid $primary-color;
-  border-radius: 4px;
-  padding: 1.25rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-top: 4px solid $primary-color;
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.09);
+
+  @include mobile { aspect-ratio: auto; }
+
+  &__promo {
+    align-self: flex-start;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $secondary-color;
+    background: rgba($secondary-color, 0.08);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+  }
 
   &__name {
-    font-family: $primary-font;
-    font-size: 1rem;
+    font-family: $secondary-font;
+    font-size: 1.15rem;
     font-weight: 700;
     color: $text-color-dark;
-    margin: 0 0 0.25rem;
-    line-height: 1.3;
+    margin: 0 0 0.2rem;
+    line-height: 1.25;
   }
 
   &__discipline {
-    font-size: 0.83rem;
+    font-size: 0.78rem;
     color: $text-color-light;
-    margin: 0 0 0.75rem;
+    margin: 0 0 0.6rem;
     line-height: 1.4;
   }
 
   &__memoire {
-    font-size: 0.87rem;
-    line-height: 1.45;
+    font-size: 0.76rem;
+    line-height: 1.4;
     color: $text-color;
     margin: 0 0 0.75rem;
 
     a {
       color: $text-color-dark;
       text-decoration: none;
-      border-bottom: 1px solid transparent;
+      border-bottom: 1px solid rgba($primary-color, 0.35);
       &:hover, &:focus {
         color: $primary-color;
         border-bottom-color: $primary-color;
@@ -3740,29 +3731,29 @@ $pc-bilan       : #3f5d8c;                 // bleu ardoise — bilan d’année
 
   &__label {
     display: block;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     color: $primary-color;
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.1rem;
   }
 
   &__links {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.9rem;
     margin-top: auto;
   }
 
   &__link {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: $secondary-color;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.3rem;
     border-bottom: 1px solid transparent;
 
     &:hover, &:focus {
