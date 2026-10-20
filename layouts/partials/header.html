@@ -35,7 +35,9 @@
     <div class="container">
       {{/* RGAA 12.6 — la zone de navigation doit être identifiable et nommée :
            plusieurs <nav> coexistent sur une page (principale, pied de page). */}}
-      <nav class="navbar navbar-expand-lg navbar-dark p-0" aria-label="Navigation principale">
+      {{/* navbar-expand-xl (et non -lg) : le menu horizontal ne tient sur une ligne
+           qu'à partir de 1200 px ; en dessous, menu burger (voir _typography.scss). */}}
+      <nav class="navbar navbar-expand-xl navbar-dark p-0" aria-label="Navigation principale">
         {{/* RGAA 6.1 — le nom accessible du lien porte la destination ; l'image
              est alors décorative (Alt "") pour ne pas doubler l'intitulé. */}}
         <a class="navbar-brand" href="{{ site.BaseURL | relLangURL }}" aria-label="{{ site.Title }} — retour à l’accueil">
