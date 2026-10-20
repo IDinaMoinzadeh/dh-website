@@ -62,7 +62,7 @@ a {
 
 // Logo : hauteur fixe, largeur strictement proportionnelle (pas d'étirement)
 .navbar-brand {
-  @media (max-width: 991px) { margin-left: 0; } // pas de décalage en mobile
+  @media (max-width: 1199.98px) { margin-left: 0; } // pas de décalage en menu burger
 
   img {
     height: 60px !important;
@@ -82,14 +82,9 @@ a {
   white-space: nowrap; // évite que "À propos" passe sur deux lignes
 }
 
-.navbar-expand-lg .navbar-nav .nav-link {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
 // Étend le rouge du menu jusqu'au bord droit de la fenêtre (sinon bande blanche à droite
 // du .container Bootstrap). Box-shadow : couvre la marge sans modifier la mise en page.
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .navbar-nav {
     box-shadow: 100vw 0 0 0 #{$primary-color};
   }
@@ -2668,7 +2663,7 @@ $pc-bilan       : #3f5d8c;                 // bleu ardoise — bilan d’année
 }
 
 /* ── Fix menu mobile : empêche le débordement vertical ────────── */
-@media (max-width: 991px) {
+@media (max-width: 1199.98px) {
   .navbar-collapse {
     max-height: calc(100vh - 70px);
     overflow-y: auto;
@@ -2681,28 +2676,59 @@ $pc-bilan       : #3f5d8c;                 // bleu ardoise — bilan d’année
   .nav-item {
     margin: 0 5px !important;
   }
-  .navbar-expand-lg .navbar-nav .nav-link {
+}
+
+/* ── Menu burger jusqu'à 1199 px, menu horizontal à partir de 1200 px ──
+   Logo (372 px) + 8 entrées (~750 px) ne tiennent pas dans les 900 px utiles
+   du .container entre 992 et 1199 px : les dernières entrées sortaient de
+   l'écran (ou passaient sur deux lignes). Le header utilise donc
+   `navbar-expand-xl` au lieu de `navbar-expand-lg` (partials/header.html).
+   De 1200 à 1399 px, espacement resserré et logo réduit pour garder ~10 %
+   de marge : en cas d'ajout d'une entrée au menu, vérifier qu'il tient
+   encore sur une ligne à 1200 px.
+   Les styles du thème visent `.navbar-expand-lg` et `max-width: 991px`
+   (mixin desktop) : ils sont repris ici pour la nouvelle bascule. Préfixe
+   .header : le thème est importé après ce fichier. */
+.header .navbar-expand-xl .navbar-nav .nav-link {
+  padding: 40px 0;
+}
+
+@media (min-width: 1200px) {
+  .header .navbar-nav .nav-item {
+    margin: 0 3px !important;
+  }
+  .header .navbar-expand-xl .navbar-nav .nav-link {
     font-size: 12px;
-    letter-spacing: 0.02em;
+    letter-spacing: 0;
   }
 }
 
-/* ── Menu desktop sur deux lignes tant qu'il ne tient pas sur une ──
-   Logo (372 px) + 8 entrées (~910 px) dépassent les 1110 px utiles du
-   .container : sans ce bloc, les dernières entrées sortaient de l'écran
-   en dessous de ~1500 px. Les entrées passent sur deux lignes dans le
-   bandeau rouge, sans changer la hauteur du header. */
-@media (min-width: 992px) and (max-width: 1499.98px) {
-  .navbar-nav {
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    padding-left: 20px;
+// Logo un peu réduit tant que la place manque (372 → 323 px de large) ;
+// la hauteur du header (98 px) ne change pas.
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .header .navbar-brand img {
+    height: 52px !important;
+    max-height: 52px;
   }
-  // Préfixe .navigation : le `padding: 40px 0` du thème est importé après ce fichier.
-  // 2 × (18 px de texte + 31 px) = 98 px, la hauteur du header sur une ligne.
-  .navigation .navbar-expand-lg .navbar-nav .nav-link {
-    padding-top: 16px;
-    padding-bottom: 15px;
+}
+
+@media (max-width: 1199.98px) {
+  .header .navigation {
+    background: $secondary-color;
+
+    .navbar-brand { padding: 12px 0; }
+  }
+  .header .navbar-collapse,
+  .header .navbar-nav {
+    background: $secondary-color;
+  }
+  .header .navbar-nav {
+    padding-left: 0;
+
+    .nav-item { margin: 0 15px !important; } // annule les 5 px du menu horizontal (≥ 992 px)
+  }
+  .header .navbar-expand-xl .navbar-nav .nav-link {
+    padding: 20px;
   }
 }
 

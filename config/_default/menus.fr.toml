@@ -16,7 +16,7 @@ url = "alumni/"
 weight = 3
 
 [[main]]
-name = "Écosystème de recherche"
+name = "Recherche"
 url = "projets/"
 weight = 4
 
