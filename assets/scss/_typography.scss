@@ -3646,3 +3646,110 @@ $pc-bilan       : #3f5d8c;                 // bleu ardoise — bilan d’année
     }
   }
 }
+
+/* — Page Alumni (layouts/alumni/list.html) — */
+.alumni-intro {
+  &__lead {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: $text-color;
+    margin-bottom: 1.25rem;
+  }
+
+  &__promos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}
+
+.alumni-promo {
+  &__title {
+    font-family: $secondary-font;
+    font-size: 1.75rem;
+    color: $secondary-color;
+    border-left: 4px solid $primary-color;
+    padding-left: 0.75rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.alumni-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
+  border-left: 3px solid $primary-color;
+  border-radius: 4px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  &__name {
+    font-family: $primary-font;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $text-color-dark;
+    margin: 0 0 0.25rem;
+    line-height: 1.3;
+  }
+
+  &__discipline {
+    font-size: 0.83rem;
+    color: $text-color-light;
+    margin: 0 0 0.75rem;
+    line-height: 1.4;
+  }
+
+  &__memoire {
+    font-size: 0.87rem;
+    line-height: 1.45;
+    color: $text-color;
+    margin: 0 0 0.75rem;
+
+    a {
+      color: $text-color-dark;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      &:hover, &:focus {
+        color: $primary-color;
+        border-bottom-color: $primary-color;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $primary-color;
+    margin-bottom: 0.15rem;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  &__link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $secondary-color;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-bottom: 1px solid transparent;
+
+    &:hover, &:focus {
+      color: $primary-color;
+      border-bottom-color: $primary-color;
+      text-decoration: none;
+    }
+  }
+}

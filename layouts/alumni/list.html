@@ -1,0 +1,74 @@
+{{/* Page Alumni.
+
+     Les données vivent dans data/fr/alumni.yml (une entrée par promotion,
+     désignée par son année de sortie du master) : ajouter une personne ou une
+     promotion ne demande pas de toucher à ce gabarit. Tout champ autre que
+     `nom` et `prenom` est facultatif et n'est affiché que s'il est renseigné. */}}
+{{ define "main" }}
+
+{{ $data := index site.Data site.Language.Lang }}
+{{ $promotions := sort $data.alumni.promotions "annee" "desc" }}
+
+<!-- intro -->
+<section class="section-sm alumni-intro">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 mx-auto text-center">
+        {{ with .Params.intro }}<p class="alumni-intro__lead">{{ . | markdownify }}</p>{{ end }}
+        {{/* RGAA 12.2 : liens d'évitement vers chaque promotion de la page. */}}
+        <nav aria-label="Promotions">
+          <ul class="alumni-intro__promos list-unstyled mb-0">
+            {{ range $promotions }}
+            <li><a href="#promotion-{{ .annee }}" class="btn btn-outline-primary btn-sm">Promotion {{ .annee }}</a></li>
+            {{ end }}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ range $i, $promo := $promotions }}
+<section class="section alumni-promo{{ if eq (mod $i 2) 0 }} bg-gray{{ end }}" id="promotion-{{ .annee }}" aria-labelledby="promotion-{{ .annee }}-titre">
+  <div class="container">
+    {{/* RGAA 9.1 : le <h1> de la page est déjà émis par la bannière (partials/page-header.html). */}}
+    <h2 class="alumni-promo__title" id="promotion-{{ .annee }}-titre">Promotion {{ .annee }}</h2>
+    {{/* RGAA 9.3 : grille de fiches = liste. */}}
+    <ul class="row list-unstyled mb-0">
+      {{ range .alumni }}
+      {{ $nom := printf "%s %s" .prenom .nom }}
+      <li class="col-lg-4 col-md-6 mb-4 d-flex">
+        <article class="alumni-card">
+          <h3 class="alumni-card__name">{{ $nom }}</h3>
+          {{ with .discipline }}<p class="alumni-card__discipline">{{ . }}</p>{{ end }}
+
+          {{ if .memoire }}
+          {{/* RGAA 8.7 : titre de mémoire dans une autre langue que le français. */}}
+          {{ $titre := .memoire }}
+          {{ with .memoire_lang }}{{ $titre = printf `<span lang="%s">%s</span>` . (htmlEscape $titre) | safeHTML }}{{ end }}
+          <p class="alumni-card__memoire">
+            <span class="alumni-card__label">Mémoire</span>
+            {{ with .memoire_lien }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $titre }}<span class="sr-only"> (nouvelle fenêtre)</span></a>{{ else }}{{ $titre }}{{ end }}
+          </p>
+          {{ end }}
+
+          {{ if or .github .linkedin }}
+          <ul class="alumni-card__links list-unstyled mb-0">
+            {{/* RGAA 6.1 / 13.2 : intitulé explicite hors contexte, ouverture signalée. */}}
+            {{ with .github }}
+            <li><a href="{{ . }}" target="_blank" rel="noopener" class="alumni-card__link"><i class="ti-github" aria-hidden="true"></i> GitHub<span class="sr-only"> de {{ $nom }} (nouvelle fenêtre)</span></a></li>
+            {{ end }}
+            {{ with .linkedin }}
+            <li><a href="{{ . }}" target="_blank" rel="noopener" class="alumni-card__link"><i class="ti-linkedin" aria-hidden="true"></i> LinkedIn<span class="sr-only"> de {{ $nom }} (nouvelle fenêtre)</span></a></li>
+            {{ end }}
+          </ul>
+          {{ end }}
+        </article>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}
+
+{{ end }}
